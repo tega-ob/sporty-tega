@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SPORTY TEGA — Team Markets Board</title>
-<meta name="description" content="SPORTY TEGA: team-markets value board (MLB + KBO, F5). Paper record only.">
+<title>SPORTY TEGA — Baseball Board</title>
+<meta name="description" content="SPORTY TEGA: baseball value board (MLB + KBO, F5). Paper record only.">
 <meta name="theme-color" content="#0d7a3f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -182,7 +182,7 @@ footer.site-foot{max-width:1100px;margin:0 auto;padding:18px 16px 30px;color:var
     <span class="ball" aria-hidden="true"></span>
     <div>
       <h1>SPORTY TEGA</h1>
-      <p class="sub">Team-markets value board &middot; MLB + KBO &middot; F5 &middot; Paper record</p>
+      <p class="sub">Baseball value board &middot; MLB + KBO &middot; F5 &middot; Paper record</p>
     </div>
   </div>
   <div class="status-cluster" role="status" aria-live="polite">
@@ -195,7 +195,7 @@ footer.site-foot{max-width:1100px;margin:0 auto;padding:18px 16px 30px;color:var
 <div class="banner banner-warn" id="warnBanner" role="alert"></div>
 <main id="main" aria-label="SPORTY TEGA dashboard"></main>
 <nav class="tabbar" role="tablist" aria-label="Dashboard sections">
-  <button type="button" role="tab" id="tab-picks" aria-selected="true" aria-controls="panel-picks" data-tab="picks"><span class="ico" aria-hidden="true">&#9917;</span>Picks<span class="badge" id="badge-picks">New</span></button>
+  <button type="button" role="tab" id="tab-picks" aria-selected="true" aria-controls="panel-picks" data-tab="picks"><span class="ico" aria-hidden="true">&#9918;</span>Picks<span class="badge" id="badge-picks">New</span></button>
   <button type="button" role="tab" id="tab-results" aria-selected="false" aria-controls="panel-results" data-tab="results"><span class="ico" aria-hidden="true">&#128198;</span>Results<span class="badge" id="badge-results">New</span></button>
   <button type="button" role="tab" id="tab-performance" aria-selected="false" aria-controls="panel-performance" data-tab="performance"><span class="ico" aria-hidden="true">&#128200;</span>Performance</button>
   <button type="button" role="tab" id="tab-settings" aria-selected="false" aria-controls="panel-settings" data-tab="settings"><span class="ico" aria-hidden="true">&#9881;</span>Settings</button>
@@ -205,7 +205,7 @@ footer.site-foot{max-width:1100px;margin:0 auto;padding:18px 16px 30px;color:var
 <script>
 "use strict";
 /* =========================================================
-   SPORTY TEGA dashboard — team markets (MLB + KBO), F5.
+   SPORTY TEGA dashboard — baseball (MLB + KBO), F5.
    Reads ./manifest.json + ./<run_id>.json (+ ./runs.json for history).
    NEVER modifies data files. No network calls except local ./ files.
    ========================================================= */
@@ -1433,7 +1433,7 @@ function sharePickCard(play){
   var W = 1080, H = 1450, c = makeCanvas(W, H), x = c.getContext("2d");
   if(!x){ showWarning("Image export isn't available in this browser.", false); return; }
   x.fillStyle = "#fffdf7"; x.fillRect(0, 0, W, H);
-  drawHeader(x, W, "SPORTY TEGA", "Paper record \u00B7 team markets \u00B7 F5");
+  drawHeader(x, W, "SPORTY TEGA", "Paper record \u00B7 baseball \u00B7 F5");
   var y = 300, bx = 48, maxW = W - 96;
   x.fillStyle = "#1b2013";
   y = wrapText(x, play.matchup, bx, y, maxW, 64, cardFont("800", 54));
