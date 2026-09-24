@@ -1,0 +1,12 @@
+[
+  {
+    "clusters": [
+      "kbo",
+      "mlb"
+    ],
+    "file": "20260923-baseline-001.json",
+    "generated_at_utc": "2026-09-24T03:18:55.678012+00:00",
+    "run_id": "20260923-baseline-001",
+    "seq": 1
+  }
+]
