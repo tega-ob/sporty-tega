@@ -1,7 +1,7 @@
 /* SPORTY TEGA service worker.
    Cache-first for the app shell; network-only for ALL *.json (never cached).
    Cache name: sporty-shell-v1. Progressive enhancement: no SW => everything still works. */
-var CACHE = "sporty-shell-v1";
+var CACHE = "sporty-shell-v2";
 var SHELL = ["./", "index.html", "icon-180.png", "icon-192.png", "icon-512.png", "manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {
