@@ -1,0 +1,22 @@
+{
+  "latest_run_id": "20260923-baseline-001",
+  "latest_seq": 1,
+  "per_cluster": {
+    "kbo": {
+      "availability_status": "ok",
+      "last_checked_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_checked_utc": "2026-09-24T03:18:55.678012+00:00",
+      "run_id": "20260923-baseline-001",
+      "seq": 1
+    },
+    "mlb": {
+      "availability_status": "ok",
+      "last_checked_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_checked_utc": "2026-09-24T03:18:55.678012+00:00",
+      "run_id": "20260923-baseline-001",
+      "seq": 1
+    }
+  },
+  "verified_at_utc": null,
+  "verified_run_id": null
+}

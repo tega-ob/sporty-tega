@@ -1,0 +1,228 @@
+{
+  "run_id": "20260923-baseline-001",
+  "seq": 1,
+  "generated_at_et": "Sep 23, 2026 · 11:18 PM ET",
+  "generated_at_utc": "2026-09-24T03:18:55.678012+00:00",
+  "board": "sporty",
+  "lanes": {
+    "mlb": "live",
+    "kbo": "live"
+  },
+  "clusters": {
+    "mlb": {
+      "last_checked_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_checked_utc": "2026-09-24T03:18:55.678012+00:00",
+      "last_changed_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_changed_utc": "2026-09-24T03:18:55.678012+00:00",
+      "changed_basis": "baseline",
+      "report_generated_utc": "2026-09-24T01:47:04.000462+00:00",
+      "plays": []
+    },
+    "kbo": {
+      "last_checked_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_checked_utc": "2026-09-24T03:18:55.678012+00:00",
+      "last_changed_et": "Sep 23, 2026 · 11:18 PM ET",
+      "last_changed_utc": "2026-09-24T03:18:55.678012+00:00",
+      "changed_basis": "baseline",
+      "report_generated_utc": "2026-09-24T01:47:04.000462+00:00",
+      "plays": []
+    }
+  },
+  "plays": [],
+  "graded": [],
+  "near_misses": [
+    {
+      "league": "MLB",
+      "matchup": "Athletics vs Los Angeles Angels",
+      "market": "1X2",
+      "selection": "Away",
+      "fair_prob": 0.5523,
+      "ev_pct": 5.49,
+      "missed_gates": [
+        "prob 55.2% < 60%"
+      ],
+      "note": "Watchlist only — NOT a play. Gated out, never ledgered, never graded."
+    },
+    {
+      "league": "MLB",
+      "matchup": "Los Angeles Dodgers vs San Diego Padres",
+      "market": "1X2",
+      "selection": "Home",
+      "fair_prob": 0.6706,
+      "ev_pct": 2.61,
+      "missed_gates": [
+        "EV 2.61% < 3%"
+      ],
+      "note": "Watchlist only — NOT a play. Gated out, never ledgered, never graded."
+    }
+  ],
+  "history": {
+    "scratched_fullgame": {
+      "in_record": false,
+      "scratched_at": "2026-09-23",
+      "reason": "User order 2026-09-23 ~11:20 PM ET: full-game paper record scratched; fresh start with F5-only plays.",
+      "record": {
+        "wins": 1,
+        "losses": 1,
+        "profit_u": -0.48
+      },
+      "plays": [
+        {
+          "play_id": "st20260923-MLB-1",
+          "matchup": "Atlanta Braves vs Cincinnati Reds",
+          "market": "1X2",
+          "selection": "Home",
+          "sportybet_decimal": 1.52,
+          "fair_prob": 0.687,
+          "ev_pct": 4.43,
+          "result": "W",
+          "profit_u": 0.52,
+          "settled_at": "2026-09-24T03:15:04.036491+00:00"
+        },
+        {
+          "play_id": "st20260923-MLB-2",
+          "matchup": "Chicago Cubs vs Miami Marlins",
+          "market": "1X2",
+          "selection": "Home",
+          "sportybet_decimal": 1.7,
+          "fair_prob": 0.6084,
+          "ev_pct": 3.44,
+          "result": "L",
+          "profit_u": -1.0,
+          "settled_at": "2026-09-24T03:15:04.036491+00:00"
+        }
+      ]
+    },
+    "voided_inaugural": {
+      "in_record": false,
+      "count": 9,
+      "plays": [
+        {
+          "play_id": "st20260922-LALIGA-1",
+          "matchup": "Barcelona vs Getafe",
+          "market": "1X2",
+          "selection": "Away",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-LIGUE1-2",
+          "matchup": "PSG vs Le Mans FC",
+          "market": "1X2",
+          "selection": "Away",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-UCL-3",
+          "matchup": "Viking FK vs Bayern Munich",
+          "market": "1X2",
+          "selection": "Home",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-EREDIVISIE-4",
+          "matchup": "Ajax vs NEC Nijmegen",
+          "market": "1X2",
+          "selection": "Away",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-BUNDESLIGA-5",
+          "matchup": "Augsburg vs Bayern Munich",
+          "market": "1X2",
+          "selection": "Home",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-BUNDESLIGA-6",
+          "matchup": "Hoffenheim vs Hamburger SV",
+          "market": "1X2",
+          "selection": "Draw",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-SERIEA-7",
+          "matchup": "Inter vs Parma Calcio",
+          "market": "1X2",
+          "selection": "Away",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-SERIEA-8",
+          "matchup": "Monza vs Cagliari",
+          "market": "1X2",
+          "selection": "Draw",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        },
+        {
+          "play_id": "st20260922-PRIMEIRA-9",
+          "matchup": "FC Famalicao vs Alverca Futebol",
+          "market": "1X2",
+          "selection": "Draw",
+          "result": "VOID",
+          "note": "Pre-gate inaugural entry (logged before the 60% / +3% gates locked 2026-09-22). Excluded from the official record; never graded."
+        }
+      ]
+    }
+  },
+  "records": {
+    "combined": {
+      "label": "0–0",
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "win_pct": null,
+      "profit_u": 0,
+      "note": "Official F5-only paper record (fresh start 2026-09-23). Flat 1u stakes, 100u bank."
+    },
+    "mlb": {
+      "label": "0–0",
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "win_pct": null,
+      "profit_u": 0.0,
+      "note": "F5-only paper record. Fresh start 2026-09-23; prior full-game record scratched, kept as dated history."
+    },
+    "kbo": {
+      "label": "0–0",
+      "wins": 0,
+      "losses": 0,
+      "pushes": 0,
+      "win_pct": null,
+      "profit_u": 0.0,
+      "note": "F5-only paper record. Fresh start 2026-09-23; prior full-game record scratched, kept as dated history."
+    }
+  },
+  "bankroll": {
+    "start_u": 100.0,
+    "current_u": 100.0,
+    "profit_u": 0,
+    "roi_pct": null,
+    "staked_u": 0,
+    "note": "Paper only. Flat 1u stakes. F5 plays only since 2026-09-23."
+  },
+  "method": {
+    "scope": "Team markets only — MLB + KBO. F5-only since 2026-09-23. Player props out. Soccer parked (0-0).",
+    "line_source": "SportyBet prices (direct) vs Pinnacle no-vig fair prices (via The Odds API).",
+    "gates": "A play qualifies only if Pinnacle no-vig fair probability >= 60% AND EV >= +3%. Both gates, every play, no exceptions.",
+    "fair_prob_min": 0.6,
+    "ev_min_pct": 3.0,
+    "stakes": "Paper, flat 1u, 100u bank. No automated placement; picks are for manual placement only."
+  },
+  "model_versions": {
+    "sporty": "1.0.0"
+  },
+  "availability_status": {
+    "mlb": "ok",
+    "kbo": "ok"
+  },
+  "content_hash": "3eb32db56be337e5368f5fa4ba73c922ace38574d3acd932474ebff5f3b1f05a"
+}

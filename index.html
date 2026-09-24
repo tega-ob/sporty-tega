@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPORTY TEGA — Team Markets Value Board</title>
+<meta name="description" content="SPORTY TEGA: SportyBet team-markets value model. Pinnacle no-vig fair prices, +EV gates, honest paper record.">
+<meta property="og:title" content="SPORTY TEGA — Team Markets Value Board">
+<meta property="og:description" content="SportyBet team markets vs Pinnacle fair prices. High-probability +EV plays only. Honest paper record.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SPORTY TEGA — Team Markets Value Board">
+<meta name="twitter:description" content="SportyBet team markets vs Pinnacle fair prices. Honest paper record.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e14'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%232dd4bf' stroke-width='3'/%3E%3Cpath d='M16 7v18M7 16h18' stroke='%232dd4bf' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0a0e14; --bg2:#0d1219; --panel:#11161f; --panel2:#151c28;
+    --line:#232c3d; --line2:#2e3a52;
+    --txt:#f1f5f9; --dim:#8b98a9; --dim2:#5d6b82;
+    --teal:#2dd4bf; --teal-d:#0d9488; --teal-glow:rgba(45,212,191,.16);
+    --green:#22c55e; --green-d:#15803d; --green-glow:rgba(34,197,94,.14);
+    --red:#ef4444; --red-glow:rgba(239,68,68,.12);
+    --gold:#f5b942; --gold-glow:rgba(245,185,66,.14);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    margin:0;padding:0;-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 420px at 12% -8%, rgba(45,212,191,.07), transparent 60%),
+      radial-gradient(800px 380px at 88% -6%, rgba(34,197,94,.05), transparent 60%);}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 18px 80px;position:relative;z-index:1}
+
+  .hero{padding:34px 0 6px;text-align:center;position:relative}
+  .hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:min(680px,92%);height:3px;border-radius:3px;
+    background:linear-gradient(90deg,transparent,var(--teal),transparent)}
+  .mark{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;
+    border-radius:16px;background:linear-gradient(135deg,#1a2230,#0e1420);
+    border:1px solid var(--line2);box-shadow:0 0 28px var(--teal-glow);margin-bottom:10px}
+  .mark svg{width:30px;height:30px}
+  .wordmark{font-size:clamp(30px,6vw,44px);font-weight:800;letter-spacing:2.5px;margin:0;
+    background:linear-gradient(180deg,#fff 30%,var(--teal) 130%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .tagline{color:var(--dim);font-size:14px;margin:8px 0 0;letter-spacing:.4px}
+  .tagline b{color:var(--teal);font-weight:600}
+
+  .nav{position:sticky;top:0;z-index:50;display:flex;gap:8px;justify-content:center;align-items:center;
+    padding:12px 8px;margin:18px -8px 0;flex-wrap:wrap;
+    background:rgba(10,14,20,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .tab{font:inherit;cursor:pointer;color:var(--dim);font-size:13px;font-weight:800;letter-spacing:1px;
+    padding:9px 22px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);
+    transition:all .18s}
+  .tab:hover{color:var(--txt);border-color:var(--teal)}
+  .tab.active{color:#062a26;background:linear-gradient(180deg,#7df0dd,#2dd4bf);
+    border-color:var(--teal);box-shadow:0 0 18px var(--teal-glow)}
+  .tab .dot{margin-right:7px}
+  .nav-sub{color:var(--dim2);text-decoration:none;font-size:12px;font-weight:600;padding:8px 10px}
+  .nav-sub:hover{color:var(--txt)}
+
+  .status{margin:22px 0;background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;
+    font-size:13px;line-height:1.65;color:var(--dim)}
+  .status b{color:var(--txt)}
+  .status .warn{color:var(--gold);font-weight:700}
+  .status .ok{color:var(--green);font-weight:700}
+  .status .brand{color:var(--teal);font-weight:700}
+
+  .sec-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--dim2);
+    text-transform:uppercase;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+  .sec-label::after{content:"";flex:1;height:1px;background:var(--line)}
+  .records{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .rec{background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
+    position:relative;overflow:hidden;transition:transform .18s,border-color .18s}
+  .rec:hover{transform:translateY(-2px);border-color:var(--line2)}
+  .rec::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--teal),transparent)}
+  .rec .k{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+  .rec .v{font-size:26px;font-weight:800;margin:4px 0 2px;letter-spacing:.5px}
+  .rec .bar{height:5px;border-radius:3px;background:#1c2433;margin-top:8px;overflow:hidden}
+  .rec .bar i{display:block;height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--teal-d),var(--teal))}
+  .rec .n{font-size:11px;color:var(--dim);margin-top:6px}
+
+  section.sport{margin:30px 0 8px;scroll-margin-top:70px}
+  .sport-head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin-bottom:4px}
+  .sport-title{font-size:21px;font-weight:800;margin:0;display:flex;align-items:center;gap:10px;
+    letter-spacing:.3px}
+  .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .fresh{font-size:12px;color:var(--dim);margin:6px 0 10px;line-height:1.6}
+  .fresh b{color:var(--txt)}
+  .state{font-size:12px;margin-bottom:10px;line-height:1.5}
+  .state:empty{display:none}
+  .state .warn{color:var(--gold);font-weight:600}
+  .state .ok{color:var(--green);font-weight:600}
+
+  .sortbar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+  .sortbar label{font-weight:600;letter-spacing:.6px;text-transform:uppercase;font-size:10px;color:var(--dim2)}
+  .sortbar select{background:var(--panel2);color:var(--txt);border:1px solid var(--line2);
+    border-radius:9px;padding:7px 10px;font-size:12.5px;font-weight:600;cursor:pointer;
+    outline:none;transition:border-color .18s}
+  .sortbar select:hover,.sortbar select:focus{border-color:var(--teal)}
+
+  .plays{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+  .play{background:linear-gradient(180deg,var(--panel2),var(--panel));
+    border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;
+    position:relative;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
+  .play:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+  .play::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,var(--teal),var(--teal-d))}
+  .play.is-loss::before{background:linear-gradient(180deg,var(--red),#7f1d1d)}
+  .play .p{font-weight:800;font-size:16px;letter-spacing:.2px}
+  .play .m{color:var(--dim);font-size:12px;margin:3px 0 8px}
+  .play .ln{font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px}
+  .side{font-size:11px;font-weight:800;letter-spacing:1px;padding:3px 9px;border-radius:6px}
+  .side.home{color:#062a26;background:linear-gradient(180deg,#7df0dd,#2dd4bf)}
+  .side.away{color:#1a1206;background:linear-gradient(180deg,#fcd34d,#f5b942)}
+  .probbar{height:6px;border-radius:4px;background:#1c2433;margin:10px 0 4px;overflow:hidden}
+  .probbar i{display:block;height:100%;border-radius:4px;transition:width .5s ease;
+    background:linear-gradient(90deg,var(--teal-d),var(--teal))}
+  .play .pr{font-size:12px;color:var(--dim);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .play .pr b{color:var(--txt)}
+  .edge-pill{font-size:11px;font-weight:800;color:var(--teal);background:var(--teal-glow);
+    border:1px solid rgba(45,212,191,.35);padding:2px 8px;border-radius:999px;white-space:nowrap}
+  .play .gt{font-size:11.5px;color:var(--dim2);margin-top:8px}
+  .play .res{font-size:13px;font-weight:800;margin-top:8px}
+  .play .res.w{color:var(--green)} .play .res.l{color:var(--red)}
+  .badge{display:inline-block;font-size:10px;font-weight:800;padding:2px 7px;border-radius:5px;
+    margin-left:7px;vertical-align:middle;letter-spacing:.6px}
+  .b-new{background:var(--green-glow);color:var(--green);border:1px solid rgba(34,197,94,.4)}
+  .b-wm{background:var(--gold-glow);color:var(--gold);border:1px solid rgba(245,185,66,.4)}
+
+  .empty{background:var(--panel);border:1px dashed var(--line2);border-radius:var(--radius);
+    padding:22px;color:var(--dim);font-size:14px;text-align:center;line-height:1.6}
+  .empty b{color:var(--txt)}
+  .rec-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--dim);
+    margin:6px 0 2px}
+  .rec-line b{color:var(--txt)}
+  .rec-line .mini{width:90px;height:5px;border-radius:3px;background:#1c2433;overflow:hidden}
+  .rec-line .mini i{display:block;height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--teal-d),var(--teal))}
+
+  .hist{font-size:13px;color:var(--dim);line-height:1.7;
+    background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+    border-radius:var(--radius);padding:16px 18px;margin-top:12px}
+  .hist b{color:var(--txt)}
+  .hist .scratch{color:var(--gold);font-weight:700}
+  .hist table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px}
+  .hist th,.hist td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  .hist th{color:var(--dim);text-transform:uppercase;font-size:10px;letter-spacing:1px}
+  .hist tr:last-child td{border-bottom:none}
+  .hist .w{color:var(--green);font-weight:700} .hist .l{color:var(--red);font-weight:700}
+  .hist .v{color:var(--dim2)}
+
+  .method{font-size:13.5px;color:var(--dim);line-height:1.7;
+    background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);
+    border-radius:var(--radius);padding:18px 20px}
+  .method b{color:var(--txt)}
+  .method .brandline{color:var(--teal);font-weight:700}
+  .method .gate{display:inline-block;background:var(--teal-glow);border:1px solid rgba(45,212,191,.35);
+    color:var(--teal);font-weight:800;font-size:12px;padding:3px 10px;border-radius:999px;margin:2px 4px 2px 0}
+  footer{margin-top:44px;padding:22px 0 8px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim2);line-height:1.8;word-break:break-all;text-align:center}
+  footer code{color:var(--dim)}
+  footer .fbrand{font-weight:800;letter-spacing:2px;color:var(--teal);font-size:13px}
+  footer .fsub{color:var(--dim);font-size:11.5px}
+  #err{display:none;background:var(--red-glow);border:1px solid var(--red);
+    border-radius:var(--radius);padding:16px 18px;margin:20px 0;font-size:14px}
+  .disclaimer{font-size:12px;color:var(--dim2);margin-top:26px;font-style:italic;text-align:center}
+  @media (max-width:560px){
+    .sport-head{align-items:flex-start;flex-direction:column}
+    .tab{padding:8px 16px;font-size:12px}
+    .nav-sub{font-size:11px}
+    .plays{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="9" fill="none" stroke="#2dd4bf" stroke-width="3"/><path d="M16 7v18M7 16h18" stroke="#2dd4bf" stroke-width="2"/></svg>
+    </div>
+    <h1 class="wordmark">SPORTY TEGA</h1>
+    <p class="tagline">SportyBet team markets &middot; <b>Pinnacle fair-price value</b> &middot; honest paper record</p>
+  </header>
+
+  <nav class="nav" aria-label="League tabs">
+    <button class="tab" data-tab="mlb" aria-label="Show MLB plays"><span class="dot">⚾</span>MLB</button>
+    <button class="tab" data-tab="kbo" aria-label="Show KBO plays"><span class="dot">⚾</span>KBO</button>
+    <a class="nav-sub" href="#records-sec">Records</a>
+    <a class="nav-sub" href="#watch-sec">Watchlist</a>
+    <a class="nav-sub" href="#history-sec">History</a>
+    <a class="nav-sub" href="#method-sec">Method</a>
+  </nav>
+
+  <div class="status"><b>SPORTY TEGA — authoritative board.</b> <span class="brand">Team markets only</span> (MLB + KBO, F5-only since 2026-09-23). Paper trading, flat 1u stakes.
+  <div id="login-line">GitHub session: checking…</div>
+  <div>Last verified public update: <b id="last-pub">—</b>.</div>
+  <div id="stale-line" style="display:none"></div>
+  </div>
+  <div id="err"></div>
+
+  <div class="sec-label" id="records-sec">Track record — SPORTY TEGA</div>
+  <div class="records" id="records"></div>
+
+  <section class="sport" id="sport-mlb">
+    <div class="sport-head">
+      <h2 class="sport-title">⚾ MLB <span class="live-dot" title="Lane live"></span></h2>
+      <div class="sortbar"><label for="sort-mlb">Sort</label>
+        <select id="sort-mlb" data-sport="mlb" aria-label="Sort MLB plays"></select></div>
+    </div>
+    <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Team markets — SPORTY TEGA</div>
+    <div class="rec-line" id="rec-mlb"></div>
+    <div class="fresh" id="fresh-mlb"></div>
+    <div class="state" id="state-mlb"></div>
+    <div class="plays" id="plays-mlb"></div>
+  </section>
+
+  <section class="sport" id="sport-kbo">
+    <div class="sport-head">
+      <h2 class="sport-title">⚾ KBO <span class="live-dot" title="Lane live"></span></h2>
+      <div class="sortbar"><label for="sort-kbo">Sort</label>
+        <select id="sort-kbo" data-sport="kbo" aria-label="Sort KBO plays"></select></div>
+    </div>
+    <div class="sub" style="color:var(--dim2);font-size:12px;margin:-2px 0 6px">Team markets — SPORTY TEGA</div>
+    <div class="rec-line" id="rec-kbo"></div>
+    <div class="fresh" id="fresh-kbo"></div>
+    <div class="state" id="state-kbo"></div>
+    <div class="plays" id="plays-kbo"></div>
+  </section>
+
+  <div class="sec-label" id="watch-sec">Near-miss watchlist — display only</div>
+  <section>
+    <div class="empty" id="watchlist"><b>Watchlist — NOT plays.</b><br>
+    These cleared one gate but not both. They are never ledgered, never graded, never counted.</div>
+    <div class="plays" id="watch-cards" style="margin-top:12px"></div>
+  </section>
+
+  <div class="sec-label" id="history-sec">History — not part of the official record</div>
+  <section>
+    <div class="hist" id="history"></div>
+  </section>
+
+  <div class="sec-label" id="method-sec">Methodology — SPORTY TEGA</div>
+  <section>
+    <div class="method" id="method"></div>
+  </section>
+
+  <div class="disclaimer">SPORTY TEGA — paper trading only. Picks are informational, not betting advice. No automated placement.</div>
+
+  <footer id="footer">
+    <div class="fbrand">◉ SPORTY TEGA</div>
+    <div class="fsub">Team-markets value board · MLB + KBO · F5-only · updated on schedule</div>
+    <div id="footer-run" style="margin-top:8px">Loading…</div>
+  </footer>
+</div>
+
+<script>
+function showErr(msg) {
+  var e = document.getElementById('err');
+  e.style.display = 'block';
+  e.textContent = 'Could not load SPORTY TEGA board data: ' + msg;
+}
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function fmtTime(iso) {
+  try {
+    var d = new Date(iso);
+    return d.toLocaleString('en-US', { month:'short', day:'numeric',
+      hour:'numeric', minute:'2-digit', hour12:true }) + ' ET';
+  } catch (e) { return iso; }
+}
+
+/* ---------------- sort controls ----------------
+   Default is always earliest-game-first (standing board rule). */
+var SORT_MODES = [
+  {v:'time-asc',  label:'Earliest game first'},
+  {v:'time-desc', label:'Latest game first'},
+  {v:'ev-desc',   label:'Highest EV'},
+  {v:'prob-desc', label:'Highest fair probability'}
+];
+var sortState = {mlb:'time-asc', kbo:'time-asc'};
+function initSortControls() {
+  document.querySelectorAll('.sortbar select').forEach(function(sel){
+    SORT_MODES.forEach(function(m){
+      var o = document.createElement('option');
+      o.value = m.v; o.textContent = m.label;
+      sel.appendChild(o);
+    });
+    sel.value = sortState[sel.getAttribute('data-sport')] || 'time-asc';
+    sel.addEventListener('change', function(){
+      sortState[sel.getAttribute('data-sport')] = sel.value;
+      if (window.__lastRun) renderSports(window.__lastRun, window.__lastManifest);
+    });
+  });
+}
+function sortPlays(plays, mode) {
+  var arr = (plays || []).slice();
+  function t(p){ var d = new Date(p.game_start); return isNaN(d) ? 0 : d.getTime(); }
+  function ev(p){ return (p.ev_pct != null) ? p.ev_pct : -1; }
+  function pr(p){ return (p.fair_prob != null) ? p.fair_prob : -1; }
+  switch (mode) {
+    case 'time-desc': return arr.sort(function(a,b){ return t(b)-t(a); });
+    case 'ev-desc':   return arr.sort(function(a,b){ return ev(b)-ev(a) || t(a)-t(b); });
+    case 'prob-desc': return arr.sort(function(a,b){ return pr(b)-pr(a) || t(a)-t(b); });
+    default:          return arr.sort(function(a,b){ return t(a)-t(b); });
+  }
+}
+
+function decToAmerican(d) {
+  d = parseFloat(d);
+  if (!(d > 1)) return null;
+  if (d >= 2) return '+' + Math.round((d - 1) * 100);
+  return '-' + Math.round(100 / (d - 1));
+}
+function resultBadge(p) {
+  if (p.result === 'W') return '<div class="res w">✓ WIN +' + Number(p.profit_u).toFixed(2) + 'u</div>';
+  if (p.result === 'L') return '<div class="res l">✗ LOSS ' + Number(p.profit_u).toFixed(2) + 'u</div>';
+  if (p.result === 'PUSH') return '<div class="res">PUSH (stake back)</div>';
+  return '';
+}
+function playCard(p) {
+  var sel = (p.selection || '').toUpperCase();
+  var sideCls = sel === 'HOME' ? 'home' : 'away';
+  var fp = (p.fair_prob != null) ? (p.fair_prob * 100) : 0;
+  var ev = (p.ev_pct != null) ? p.ev_pct : null;
+  var am = decToAmerican(p.sportybet_decimal);
+  var isGraded = (p.result === 'W' || p.result === 'L' || p.result === 'PUSH');
+  return '<div class="play' + (p.result === 'L' ? ' is-loss' : '') + '"><div class="p">' +
+    esc(p.matchup) + '</div>' +
+    '<div class="m">' + esc(p.market || '') + ' · SportyBet ' +
+    (am ? '<b style="color:var(--teal)">' + am + '</b> (' + esc(p.sportybet_decimal) + ')' : esc(p.sportybet_decimal || '')) +
+    '</div>' +
+    '<div class="ln"><span class="side ' + sideCls + '">' + esc(sel) + '</span>' +
+    (p.line != null ? ' ' + esc(p.line) : '') + '</div>' +
+    '<div class="probbar"><i style="width:' + Math.max(0, Math.min(100, fp)).toFixed(1) + '%"></i></div>' +
+    '<div class="pr"><span>Fair <b>' + fp.toFixed(1) + '%</b></span>' +
+    (ev != null ? '<span class="edge-pill">EV +' + ev.toFixed(2) + '%</span>' : '') + '</div>' +
+    '<div class="gt">First pitch: ' + fmtTime(p.game_start) + '</div>' +
+    resultBadge(p) + '</div>';
+}
+function watchCard(w) {
+  var fp = (w.fair_prob != null) ? (w.fair_prob * 100) : 0;
+  return '<div class="play"><div class="p">' + esc(w.matchup) +
+    ' <span class="badge b-wm">WATCHLIST</span></div>' +
+    '<div class="m">' + esc(w.market || '') + ' · ' + esc(w.selection || '') + '</div>' +
+    '<div class="probbar"><i style="width:' + Math.max(0, Math.min(100, fp)).toFixed(1) + '%"></i></div>' +
+    '<div class="pr"><span>Fair <b>' + fp.toFixed(1) + '%</b></span>' +
+    '<span class="edge-pill">EV +' + Number(w.ev_pct).toFixed(2) + '%</span></div>' +
+    '<div class="gt">Gated out: ' + esc((w.missed_gates || []).join('; ')) + '</div>' +
+    '<div class="gt" style="color:var(--gold)">NOT a play — never ledgered, never graded.</div></div>';
+}
+
+var SPORT_RECORD_KEY = {mlb:'mlb', kbo:'kbo'};
+function renderRecLine(run, sport) {
+  var el = document.getElementById('rec-' + sport);
+  if (!el) return;
+  var rec = (run.records || {})[SPORT_RECORD_KEY[sport]] || {};
+  if (!rec.label) { el.innerHTML = ''; return; }
+  var wp = (rec.win_pct != null) ? rec.win_pct * 100 : null;
+  el.innerHTML = 'Record <b>' + esc(rec.label) + '</b>' +
+    (wp != null ? ' · ' + wp.toFixed(1) + '%' +
+      '<span class="mini"><i style="width:' + Math.max(0, Math.min(100, wp)).toFixed(1) + '%"></i></span>' : '') +
+    (rec.profit_u != null ? ' · <b>' + (rec.profit_u >= 0 ? '+' : '') + rec.profit_u.toFixed(2) + 'u</b>' : '');
+}
+
+function renderSport(run, manifest, sport, startLabel) {
+  var cl = (run.clusters || {})[sport] || {};
+  var avail = ((run.availability_status || {})[sport]) || 'unknown';
+  var fresh = document.getElementById('fresh-' + sport);
+  var state = document.getElementById('state-' + sport);
+  var cards = document.getElementById('plays-' + sport);
+  var fparts = [];
+  if (cl.last_checked_et) fparts.push('Last scan <b>' + esc(cl.last_checked_et) + '</b>');
+  fresh.innerHTML = fparts.join(' · ') || '—';
+  var cov = [];
+  if (avail === 'ok') cov.push('<span class="ok">Scan data OK.</span>');
+  else cov.push('<span class="warn">Availability unconfirmed.</span>');
+  state.innerHTML = cov.join(' ');
+  renderRecLine(run, sport);
+  var plays = sortPlays(cl.plays, sortState[sport] || 'time-asc');
+  if (!plays.length) {
+    cards.innerHTML = '<div class="empty"><b>✓ No qualifying plays.</b> ' +
+      'Nothing cleared both gates on this slate — a quiet card beats a forced one. ' +
+      'F5-only scope; the F5 model runs in shadow mode until 2027.</div>';
+  } else {
+    cards.innerHTML = plays.map(playCard).join('');
+  }
+}
+
+function renderRecordsStrip(run) {
+  var R = run.records || {};
+  var BK = run.bankroll || {};
+  function card(k, rec) {
+    rec = rec || {};
+    var wp = (rec.win_pct != null) ? rec.win_pct : null;
+    var bar = (wp != null)
+      ? '<div class="bar"><i style="width:' + Math.max(0, Math.min(100, wp*100)).toFixed(1) + '%"></i></div>'
+      : '';
+    var sub = (wp != null) ? (wp*100).toFixed(1) + '%' : '—';
+    if (rec.profit_u != null) sub += ' · ' + (rec.profit_u >= 0 ? '+' : '') + rec.profit_u.toFixed(2) + 'u';
+    return '<div class="rec"><div class="k">' + esc(k) + '</div><div class="v">' +
+      esc(rec.label || '—') + '</div>' + bar + '<div class="n">' + esc(sub) + '</div></div>';
+  }
+  var bkHtml = '<div class="rec"><div class="k">Paper bankroll</div><div class="v">' +
+    Number(BK.current_u || 100).toFixed(1) + 'u</div>' +
+    '<div class="n">started 100u · flat 1u stakes</div></div>';
+  document.getElementById('records').innerHTML =
+    card('Combined', R.combined) + card('MLB', R.mlb) + card('KBO', R.kbo) + bkHtml;
+}
+
+function renderWatchlist(run) {
+  var list = run.near_misses || [];
+  var box = document.getElementById('watch-cards');
+  if (!list.length) { box.innerHTML = ''; return; }
+  box.innerHTML = list.map(watchCard).join('');
+}
+
+function renderHistory(run) {
+  var H = run.history || {};
+  var el = document.getElementById('history');
+  var html = '';
+  var sc = H.scratched_fullgame;
+  if (sc) {
+    html += '<div><span class="scratch">SCRATCHED 2026-09-23</span> — full-game paper record ' +
+      esc(sc.record.wins + '–' + sc.record.losses) + ' (' +
+      (sc.record.profit_u >= 0 ? '+' : '') + sc.record.profit_u.toFixed(2) + 'u). ' +
+      esc(sc.reason) + ' <b>Not part of the official record.</b></div>';
+    if ((sc.plays || []).length) {
+      html += '<table><tr><th>Play</th><th>Market</th><th>Side</th><th>Result</th><th>P/L</th></tr>' +
+        sc.plays.map(function(p){
+          var rc = p.result === 'W' ? 'w' : (p.result === 'L' ? 'l' : 'v');
+          return '<tr><td>' + esc(p.matchup) + '</td><td>' + esc(p.market) + '</td><td>' +
+            esc(p.selection) + '</td><td class="' + rc + '">' + esc(p.result) + '</td><td>' +
+            (p.profit_u >= 0 ? '+' : '') + Number(p.profit_u).toFixed(2) + 'u</td></tr>';
+        }).join('') + '</table>';
+    }
+  }
+  var vd = H.voided_inaugural;
+  if (vd) {
+    html += '<div style="margin-top:14px"><b>' + vd.count + ' pre-gate inaugural plays — VOIDED.</b> ' +
+      'Logged before the 60% fair-probability / +3% EV gates were locked on 2026-09-22. ' +
+      'Excluded from the official record; never graded.</div>';
+    if ((vd.plays || []).length) {
+      html += '<table><tr><th>Play</th><th>Market</th><th>Side</th><th>Status</th></tr>' +
+        vd.plays.map(function(p){
+          return '<tr><td>' + esc(p.matchup) + '</td><td>' + esc(p.market) + '</td><td>' +
+            esc(p.selection) + '</td><td class="v">VOID</td></tr>';
+        }).join('') + '</table>';
+    }
+  }
+  el.innerHTML = html || '<div>No history yet.</div>';
+}
+
+function renderMethod(run) {
+  var M = run.method || {};
+  document.getElementById('method').innerHTML =
+    '<span class="brandline">SPORTY TEGA</span> is team markets only — ' +
+    esc(M.scope || 'MLB + KBO.') + ' <b>Lines:</b> ' +
+    esc(M.line_source || 'SportyBet vs Pinnacle no-vig fair.') +
+    ' <b>Every play must clear both gates:</b> ' +
+    '<span class="gate">Pinnacle no-vig fair ≥ 60%</span>' +
+    '<span class="gate">EV ≥ +3%</span> ' +
+    'No gate, no play — underdog longshots never qualify even at high EV. ' +
+    '<b>Stakes:</b> ' + esc(M.stakes || 'paper, flat 1u.') +
+    ' Recommendations are not wagers.';
+}
+
+function renderStatus(run, manifest) {
+  manifest = manifest || {};
+  var lp = document.getElementById('last-pub');
+  var verifiedAt = null, verifiedPass = false;
+  if (manifest.verified_run_id === run.run_id && manifest.verified_at_utc) {
+    verifiedAt = manifest.verified_at_utc;
+    verifiedPass = true;
+  }
+  lp.textContent = verifiedPass
+    ? fmtTime(verifiedAt) + ' (verified)'
+    : run.generated_at_et + ' (generated time — verification not yet recorded)';
+  var base = verifiedAt || run.generated_at_utc;
+  var staleEl = document.getElementById('stale-line');
+  try {
+    var ageH = (Date.now() - new Date(base).getTime()) / 3600000;
+    if (ageH > 12) {
+      staleEl.style.display = '';
+      staleEl.innerHTML = '<span class="warn">Stale — awaiting next scheduled run.</span> ' +
+        'Last update ' + (verifiedAt ? fmtTime(verifiedAt) : run.generated_at_et) + '.';
+    } else {
+      staleEl.style.display = 'none';
+    }
+  } catch (e) { staleEl.style.display = 'none'; }
+}
+
+function renderLogin() {
+  var el = document.getElementById('login-line');
+  fetch('login_status.json', {cache:'no-store'}).then(function(r){
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(s){
+    if (s && s.status === 'ok') {
+      el.textContent = 'GitHub session: OK as of ' + fmtTime(s.checked_at) + '.';
+    } else if (s && s.status) {
+      el.innerHTML = 'GitHub session: <span class="warn">' + s.status +
+        ' (as of ' + fmtTime(s.checked_at) + ')</span> — publishing may fail.';
+    } else {
+      el.innerHTML = 'GitHub session: <span class="warn">status unknown</span> (first check pending).';
+    }
+  }).catch(function(){
+    el.innerHTML = 'GitHub session: <span class="warn">status unknown</span> (first check pending).';
+  });
+}
+
+function renderPerf(run) {
+  fetch('records.json', {cache:'no-store'}).then(function(r){
+    if (!r.ok) throw 0;
+    return r.json();
+  }).then(function(rec){
+    var rows = ((rec && rec.rows) || []).filter(function(r){
+      return r && r.league && (r.wins != null) && (r.losses != null);
+    });
+    if (!rows.length) return;
+    var tr = rows.map(function(r){
+      return '<tr><td>' + esc(r.league) + '</td><td>' + esc(r.market || '') + '</td><td>' +
+        (r.wins + '-' + r.losses + '-' + (r.pushes || 0)) + '</td><td>' +
+        ((r.profit_u >= 0 ? '+' : '') + Number(r.profit_u).toFixed(2) + 'u') + '</td></tr>';
+    }).join('');
+    var d = document.createElement('div');
+    d.className = 'hist';
+    d.style.marginTop = '12px';
+    d.innerHTML = '<b>Performance by league × market</b> (published plays only)' +
+      '<table><tr><th>League</th><th>Market</th><th>W-L-P</th><th>P/L</th></tr>' + tr + '</table>';
+    document.getElementById('records').after(d);
+  }).catch(function(){});
+}
+
+function renderSports(run, manifest) {
+  renderSport(run, manifest, 'mlb', 'First pitch');
+  renderSport(run, manifest, 'kbo', 'First pitch');
+}
+
+function render(manifest, run) {
+  window.__lastRun = run;
+  window.__lastManifest = manifest;
+  renderStatus(run, manifest);
+  renderRecordsStrip(run);
+  renderSports(run, manifest);
+  renderWatchlist(run);
+  renderHistory(run);
+  renderMethod(run);
+  document.getElementById('footer-run').innerHTML =
+    'Run <code>' + esc(run.run_id) + '</code> (seq ' + esc(run.seq) + ') · generated ' + esc(run.generated_at_et) +
+    '<br>Content hash <code>' + esc(run.content_hash) + '</code>';
+}
+
+var TAB_KEY = 'sporty-tega-league-tab';
+var SPORT_KEYS = ['mlb', 'kbo'];
+function setTab(sport, save) {
+  if (SPORT_KEYS.indexOf(sport) < 0) sport = 'mlb';
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.classList.toggle('active', t.getAttribute('data-tab') === sport);
+  });
+  SPORT_KEYS.forEach(function(s){
+    var sec = document.getElementById('sport-' + s);
+    if (sec) sec.style.display = (s === sport) ? '' : 'none';
+  });
+  if (save !== false) { try { localStorage.setItem(TAB_KEY, sport); } catch (e) {} }
+}
+function initTabs() {
+  var saved = null;
+  try { saved = localStorage.getItem(TAB_KEY); } catch (e) {}
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){ setTab(t.getAttribute('data-tab')); });
+  });
+  setTab(saved, false);
+}
+
+initSortControls();
+initTabs();
+
+fetch('manifest.json', {cache:'no-store'})
+  .then(function(r){ if(!r.ok) throw new Error('manifest HTTP '+r.status); return r.json(); })
+  .then(function(m){
+    return fetch(m.latest_run_id+'.json', {cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('run payload HTTP '+r.status); return r.json(); })
+      .then(function(run){
+        if (run.board !== 'sporty') throw new Error('payload is not a SPORTY TEGA board');
+        return {manifest:m, run:run};
+      });
+  })
+  .then(function(both){
+    render(both.manifest, both.run);
+    renderLogin();
+    renderPerf(both.run);
+  })
+  .catch(function(e){ showErr(e.message); document.getElementById('footer-run').textContent='Load failed.'; });
+</script>
+</body>
+</html>
